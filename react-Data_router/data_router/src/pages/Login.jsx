@@ -1,0 +1,74 @@
+
+import useAuth from "../hooks/useAuth";
+import { Auth } from "../myContext/AuthContext";
+const Login = () => {
+
+  const {handleSubmit,loginData,register,errors,navigate}=useAuth()
+ 
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-zinc-950 px-4">
+      <div className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-xl">
+        <h2 className="text-3xl font-bold text-white text-center mb-2">
+          Welcome Back
+        </h2>
+
+        <p className="text-zinc-400 text-center mb-8">Login to your account</p>
+
+        <form onSubmit={handleSubmit(loginData)} className="space-y-5">
+          <div>
+            <label className="block text-zinc-300 mb-2">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              {...register("email", {
+                required: "email is required",
+              })}
+            />
+            {errors.email && (
+              <p className="text-red-600">{errors.massage.email}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-zinc-300 mb-2">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              {...register("password", {
+                required: "password is required",
+                minlength: {
+                  value: 6,
+                  massage: "minimum length must be 6 digits",
+                },
+              })}
+            />
+            {errors.password && (
+              <p className="text-red-600">{errors.massage.password}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-300"
+          >
+            Login
+          </button>
+        </form>
+
+        <p
+          onClick={() => navigate("/register")}
+          className="text-center text-zinc-400 mt-6"
+        >
+          Don't have an account?{" "}
+          <span className="text-indigo-500 cursor-pointer hover:underline">
+            Register
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
