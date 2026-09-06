@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getAllProduct } from "./api/productApi";
 import ProductCard from "./component/Productcard";
+
 const Pagination = () => {
   const [page, setPage] = useState(0);
   let limit = 10;
